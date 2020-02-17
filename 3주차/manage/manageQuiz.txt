@@ -1,0 +1,68 @@
+-------------------------
+class StudentService_ver2
+-------------------------
+- sc : Scanner
+- stuArr : Student[3]
+-------------------------
+<<constructor>>
++ StudentService_ver2()
+
+<<method>>
+- getIdx() : int
+
+- insertInfo(Student,int):void
++ insertInfoAll() : void
++ insertInfoIdx() : void
+
+- insertScore(Student,int):void
++ insertScoreAll() : void
++ insertSocreIdx() : void
+
++ insertStu(int idx) : void
++ insertStuAll() : void
+
+- calcSum(Student) : void
+- calcAvg(Student) : void
+
+- printStu(Student,int):void
++ printStuAll() : void
++ printStuIdx() : void
+-------------------------
+
+
+
+추가	- 몇번째 학생을 선택할지 입력받기
+		getIdx()
+
+수정	- 인적 정보 1명 입력
+		insertInfo()
+추가	- 인적 정보 1명 입력(선택)
+		insertInfoIdx()
+
+	  예시)	insertInfoIdx() {
+		  int idx = getIdx();
+		  insertInfo(stuArr[idx], idx);
+		}
+추가	- 인적 정보 3명 입력(순서대로)
+		insertInfoAll()
+
+수정	- 점수 1명 입력
+		insertScore()
+추가	- 점수 1명 입력(선택)
+		insertScoreIdx()
+	  예시)	insertScoreIdx() {
+		  int idx = getIdx();
+		  insertScore(stuArr[idx], idx);
+		}
+추가	- 점수 3명 입력(순서대로)
+		insertScoreAll()
+
+추가	- 인적+점수 1명 입력(선택)
+		insertStu()
+추가	- 인적+점수 3명 입력(순서대로)
+		insertStuAll()
+
+수정	- 학생 출력 1명(선택)
+		printStuIdx()
+추가	- 학생 출력 3명(순서대로)
+		printStuAll()
