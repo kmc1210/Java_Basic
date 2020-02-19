@@ -30,3 +30,50 @@
       상수 모음집 : 상수들만 모아 따로 관리하기 위해 사용 
       
       메소드 개발 가이드 : 개발해야하는 메소드의 형식을 강제하기 위해 사용
+    
+ + 클래스와 인터페이스의 상속
+ 
+  - 클래스가 인터페이스를 상속(구현)할 때 : implements
+   ( 여러 개 인터페이스 상속 가능 )
+   
+  - 클래스가 클래스를 상속할 때 : extends
+   ( 한 개 클래스만 상속 가능)
+   
+  - 인터페이스가 인터페이스를 상속할 때 : extends
+   ( 여러 개 인터페이스 상속 가능)
+   
+   ** 인터페이스가 클래스를 상속할 때는 없다! 말이 안되는 소리다! :(
+ 
+ + ObjectAid
+ 
+  - 클래스 다이어그램 자동화 도구
+ 
+  - https://www.objectaid.com/home
+  
+    Name 
+    
+ + 이클립스에 적용하기
+ 
+    Help 메뉴  - Install New Software 선택
+    
+    Add... 버튼 클릭
+    
+    Name과 URL 적용
+    Name: ObjectAid UML Explorer
+    URL: http://www.objectaid.com/update/current
+    
+    Add 클릭
+    
+    ObjectAid UML Explorer 항목 체크
+    
+    Next
+    
+    Next
+    
+    라이센스 동의 항목 선택
+    
+    Finish
+    
+    Install Anyway...
+    
+    Restart Now
