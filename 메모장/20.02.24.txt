@@ -36,3 +36,16 @@
   
   - 한번에 (기존capacity + 1) * 2 보다 긴 문자열을 저장하는 상황에서는
     length() 만큼 capacity가 설정된다.
+    
+    
+ + StringBuffer와 StringBuilder의 차이점
+  
+  - StringBuffer는 모든 메소드가 동기화 처리되어있다. ( Thread-Safe, 스레드에 안전 )
+  - StringBuilder는 비동기화 처리되어있다.
+  
+  - 멀티스레드 환경에서
+  	StringBuffer는 스레드들이 내부 문자열 저장소를 순서대로 접근하게 만들어짐
+	StringBuilder는 스레드들이 내부 문자열 저장소에 동시에 접근할 수 있음
+	
+  - 멀티스레딩 환경에 맞춰 둘 중 골라서 사용해주어야 한다.
+  
