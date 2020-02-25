@@ -1,0 +1,49 @@
+Sting : The String class represents character strings 
+
+     + 공백 문자, White Space Character
+	
+	- 띄어쓰기 : ' ' (ASCII 32)
+	
+	- 개행, 줄바꿈 : '\n' (ASCII 10 / new line의 약자)
+	
+	- 탭, 수평탭 : '\t' (ASCII 9 HT)
+
+
+  ** 개행은 운영체제에 따라 '\r' '\n' 를 사용하고 조합 방법이 달라진다.
+
+     - '\r' : CR, carraige Return
+     - '\N' : LF, Line Feed(줄 먹이기), New Line
+	윈도우: '\r' '\n' 으로 사용
+	리눅스 : '\n' 사용
+	맥OS : '\r'이었는데 요즘에는 '\n'
+
+EX)	ABCDEF_LF
+	      ↓
+	_←---_LINE FEED (줄 먹이기)
+	Carriage
+	Return (CR)
+
+
+	 System.in _____    CPU	    _____ System.out
+  	  입력장치 →   □(프로그램) →   출력장치
+	   키보드  _____   컴퓨터   _____  모니터
+	 표준입력장치	     MPA	 표준 출력 장치
+	Standard Input	     HDD	Standard Output(Stdout)
+	    Stdin
+ 입력장치를 통해 컴퓨터로 데이터가 흘러가는 통로 : 스트림 (Standard Input Stdin)
+
+ ***입력장치와 프로그램(입력버퍼),프로그램과 출력장치 스트림 중간에(출력버퍼)버퍼라는 곳에 데이터가 쌓이고 거기서 조금씩 가져간다.
+ 버퍼 = 임시저장소
+
+   + 제어문, Control Statement
+    - 프로그램의 정상적인 흐름을 제어하는 구문
+     (정상적인 흐름 : main()메소드에서 시작하여 코드 한 줄씩 끝까지 수행되는 것)
+ 
+    - 분기
+ 
+    - 프로그램의 실행 흐름을 개발자가 원하는 방향으로 제어할 수 있다.
+
+   + 제어문의 종류
+	- 조건문, Condition : if, else if, else
+	- 반복문, Loop : for, while, do-while
+	- 선택문 : switch
