@@ -1,0 +1,653 @@
+1.	2001020215_15v3.1 기본문법 활용하기
+점수 (15.0점)
+고객 요구사항에 맞춰 가위 바위 보 게임 프로그램을 개발하는 도중 테스트단계에서 고객이 원하는 실행결과가 도출되지 않았다. 예상 실행결과가 정확히 도출될 수 있도록 문제점이 있는 코드를 찾아 [원인](15점)에 파악된 문제점을 기술하고, 해결 방안을 구상하여 [조치내용](15점)에 해결방법을 작성하여 보고서를 완성하시오. (30점)
+고객 요구사항
+
+1. 가위 바위 보 중 하나의 문자열을 입력 받고, 난수를 발생시켜 랜덤하게 가위 바위 보 문자열을 생성한다.
+
+2. 랜덤한 가위 바위 보 문자열과 입력한 문자열이 같으면 아래 실행 결과처럼 비겼다고 출력하고 가위 바위 보 게임을 반복한다.
+
+3 입력한 가위 바위 보 문자열이 랜덤한 가위 바위 보 문자열과 비교하여 가위 바위 보 게임의 룰 대로 이긴 경우 이겼다고 출력, 진 경우 졌다고 출력 후 종료
+
+정상 실행 결과 예시
+
+----------- 컴퓨터에게 지는 경우 -------------
+
+가위 바위 보 게임을 시작합니다.
+
+가위 바위 보 중 한 개를 입력하세요 : 가위
+
+당신은 가위를 냈습니다.
+
+컴퓨터는 바위를 냈습니다.
+
+당신이 졌습니다!
+
+-----------컴퓨터에게 이기는 경우 --------------
+
+가위 바위 보 게임을 시작합니다.
+
+가위 바위 보 중 한 개를 입력하세요 : 보
+
+당신은 보를 냈습니다.
+
+컴퓨터는 바위를 냈습니다.
+
+당신이 이겼습니다!
+
+-------- 컴퓨터와 비기는 경우 ------------
+
+가위 바위 보 게임을 시작합니다.
+
+가위 바위 보 중 한 개를 입력하세요 : 가위
+
+당신은 가위를 냈습니다.
+
+컴퓨터는 가위를 냈습니다.
+
+비겼습니다. 다시 시작합니다.
+
+가위 바위 보 중 한 개를 입력하세요 : <-- 출력하며 반복됨
+
+
+
+01_Ps_image1.jpg
+
+
+
+수강생 답
+(원인)	원인:
+1. 
+
+String computer의 Math.random 난수의 범위가 (int)(Math.random() *4) 의 경우 정수 0~3까지의 값이 배출된다. 하지만 switch case 에서는 0일때 "가위" 1일때 "바위" 2일때 "보" 이기 때문에 3을 입력받을 경우 컴퓨터의 값이 나오지 않게 되므로 조건문에 성립되지 않는다.
+
+2.
+
+computer와 input의 값이 같을경우 비겨야 하는게 올바른 실행이지만 지는 경우로 나옴
+
+답안첨삭	조건식이 false임 -5
+
+
+
+
+요구된 사항이 맞지 않거나 문법적인 오류에 대해 일부만 파악하엿음
+
+모범답안	
+17행 : 부적절한 범위의 난수가 발생됨
+
+29, 34, 35, 38, 39, 43행 : 문자열 비교시 ==로 비교하지 못하고 equals()로 비교해야함
+
+57행 : do~while문의 조건식에 false로 값이 되어 있어 반복문이 구동되지 않음
+
+수강생 답
+(조치내용)	int random 값을 (int)(Math.random()*4); 에서 (int)(Math.random()*3); 으로 범위 조절
+답안첨삭	문자열 비교에는 equals() 사용 -5
+조건식이 true로 변경 -5​
+오류 원인에 대한 해결 조치를 일부만 제시하였음
+
+모범답안	
+17행 : int random = (int)(Math.random() * 3); 으로 난수 범위 수정
+
+29, 34, 35, 38, 39, 43행 : 문자열.equals(문자열)로 조건식 변경
+
+57행 : do~while문의 조건식을 true로 변경
+
+평가항목	성취기준	채점기준
+0 ~ 4	기 작성된 코드를 분석하고 이해하는 능력이 많이 부족하고 문법 오류를 수정할 수 없다.
+10 ~ 14	문법 오류를 조금 이해하고 부분적으로 수정할 수 있으며, 요구사항을 조금 반영할 수 있다.
+15 ~ 19	문법 오류를 일부만 이해하고 수정할 수 있으며, 요구사항을 부분적으로 반영할 수 있다.
+20 ~ 24	기 작성된 코드를 분석하여 문법 오류를 부분적으로 이해하고 수정할 수 있으며, 코드 검토 결과를 일부만 수용하고 요구사항을 대략적으로 반영할 수 있다.
+25 ~ 29	기 작성된 코드를 분석하여 문법 오류를 이해하고 수정할 수 있으며, 코드 검토 결과를 수용하고 요구사항을 반영할 수 있다.
+30	기 작성된 코드를 정확하게 분석하여 문법 오류를 이해하고 수정할 수 있으며, 코드 검토 결과를 수용하고 요구사항을 잘 반영할 수 있다.
+5 ~ 9	기 작성된 코드를 분석하여 이해하는 능력이 부족하고, 문법오류를 조금 수정할 수 있다.
+2.	2001020215_15v3.2 언어특성 활용하기
+점수 (30.0점)
+제시된 클래스 다이어그램을 분석하여 아래의 실행결과가 도출될 수 있도록, 클래스 작성 순서를 구체적으로 [원인](10점)에 기술하고, 클래스간 의존관계를 정하고 클래스별 상세 요구에 따라 단계별 코드를 [조치내용](40점)에 완성하여 제출하시오. (50점)
+
+
+01_Ps_image2_duckDiagram.PNG
+01_Ps_image2_duckResult.PNG
+
+
+수강생 답
+(원인)	DuckManger는 실행클래스 
+Duck은 부모클래스로 Mallard와 RubberDuck 에게 상속하여
+
+두 클래스에서 오버라이드를 통해 name과 kind를 물려받음
+
+그 후 DuckManger를 통해 불러와서 출력
+
+답안첨삭	
+UML 에 제시된 요구사항에 따라 시나리오 작성 순서를 정확하게 기술하였음
+
+모범답안	
+1. 추상클래스 Duck 을 작성한다.
+
+2. Duck 을 상속받은 후손클래스로 RubberDuck과 Mallard 클래스를 작성한다.
+
+3. Duck 클래스의 추상메소드를 상속받은 후손클래스에서 오버라이딩한다.
+
+4. main() 메소드를 포함하는 실행용 클래스로 DuckManager 클래스를 작성한다.
+
+5. main() 메소드에서 요구한 실행결과가 도출되도록 RubberDuck과 Mallard 클래스를 사용하여 실행될 코드를 작성한다.
+
+수강생 답
+(조치내용)	package duck.controller;
+
+public class DuckManager {
+	public static void main(String[] args) {
+		String[] Duck = new String[5]; 
+	}
+}
+//DuckManager
+
+
+
+package duck.controller.model.vo;
+
+
+
+public class Duck {
+
+	String name;
+
+	String kinds;
+
+
+
+	public Duck() {
+
+	}
+
+	public Duck(String name, String kinds) {
+
+		
+
+	}
+
+	
+
+	public void quack() {
+
+		
+
+	}
+
+	public String getName() {
+
+		return name;
+
+	}
+
+	public void setName(String name) {
+
+		this.name = name;
+
+	}
+
+	public String getKinds() {
+
+		return kinds;
+
+	}
+
+	public void setKinds(String kinds) {
+
+		this.kinds = kinds;
+
+	}
+
+}//Duck
+
+
+
+
+
+public class Mallard extends Duck{
+
+
+
+	String location;
+
+	String color;
+
+	public Mallard() {
+
+
+
+	}
+
+	public Mallard(String name, String kinds, String color) {
+
+		
+
+	}
+
+	public void quack() {
+
+		​System.out.println("주 서식지는 " + location + "이며, 색상은" + color + "입니다.");
+
+	}
+
+	public String getLocation() {
+
+		return location;
+
+	}
+
+	public void setLocation(String location) {
+
+		this.location = location;
+
+	}
+
+	public String getColor() {
+
+		return color;
+
+	}
+
+	public void setColor(String color) {
+
+		this.color = color;
+
+	}
+
+	
+
+}​//Mallard
+
+
+
+package duck.controller.model.vo;
+
+
+
+public class RubberDuck extends Duck{
+
+	public String PLACE = "석촌호수";
+
+	private int weight;
+
+	public RubberDuck() {
+
+	}
+
+	public RubberDuck(String name, String kinds, int weight) {	
+
+	}
+
+	public void quack() {
+
+		​System.out.println("몸무게는 " + weight + "kg입니다. 하지만 전 말을 하지 못해요");
+
+	}
+
+	public String getPLACE() {
+
+		return PLACE;
+
+	}
+
+	public void setPLACE(String pLACE) {
+
+		PLACE = pLACE;
+
+	}
+
+	public int getWeight() {
+
+		return weight;
+
+	}
+
+	public void setWeight(int weight) {
+
+		this.weight = weight;
+
+	}
+
+	
+
+}//RubberDuck
+
+
+
+답안첨삭	
+패키지 선언 틀림 -4
+
+Duck 클래스에서 abstract 키워드 누락 -2
+quack() 메소드에서 abstract 누락 -2
+
+반복문을 이용한 객체 배열 처리 하지 않음 -2​
+모범답안	
+//1. 추상클래스 Duck 작성
+
+package com.kh.test.duck.model.vo;
+
+public abstract class Duck {
+
+private String name;
+
+private String kinds;
+
+protected Duck() {}
+
+protected Duck(String name, String kinds) {
+
+this.name = name;
+
+this.kinds = kinds;
+
+}
+
+public void setName(String name) {
+
+this.name = name;
+
+}
+
+public void setKinds(String kinds) {
+
+this.kinds = kinds;
+
+}
+
+public String getName() {
+
+return name;
+
+}
+
+public String getKinds() {
+
+return kinds;
+
+}
+
+public String toString() {
+
+return "저는 " + kinds + "이고, 이름은 " + name + "입니다.";
+
+}
+
+public abstract void quack();
+
+}
+
+}
+
+//3. 후손클래스 RubberDuck 작성, 메소드 오버라이딩 처리
+
+package com.kh.test.duck.model.vo;
+
+public class RubberDuck extends Duck{
+
+public static final String PLACE = "석촌호수";
+
+private int weight;
+
+public RubberDuck() {}
+
+public RubberDuck(String name, String kinds, int weight) {
+
+super(name, kinds);
+
+this.weight = weight;
+
+}
+
+public void setWeight(int weight) {
+
+this.weight = weight;
+
+}
+
+public int getWeight() {
+
+return weight;
+
+}
+
+@Override
+
+public void quack() {
+
+System.out.println(super.toString() + " 몸무게는 " + weight + "kg입니다. 하지만 전 말을 하지 못해요.");
+
+}
+
+}
+
+//4. 후손클래스 Mallard 작성, 메소드 오버라이딩 처리
+
+package com.kh.test.duck.model.vo;
+
+public class Mallard extends Duck{
+
+private String location;
+
+private String color;
+
+public Mallard() {}
+
+public Mallard(String name, String kinds, String location, String color) {
+
+super(name, kinds);
+
+this.location = location;
+
+this.color = color;
+
+}
+
+@Override
+
+public void quack() {
+
+System.out.println(super.toString() + " 주 서식지는 " + location + "이며, 색상은 " + color + "입니다.");
+
+}
+
+}
+
+//실행용 클래스 작성과 실행 코드 작성
+
+package com.kh.test.duck.controller;
+
+import com.kh.test.duck.model.vo.Duck;
+
+import com.kh.test.duck.model.vo.Mallard;
+
+import com.kh.test.duck.model.vo.RubberDuck;
+
+public class DuckMaker {
+
+public static void main(String[] args) {
+
+Duck[] drr = new Duck[5];
+
+drr[0] = new RubberDuck("도날드", "러버덕", 100);
+
+drr[1] = new Mallard("꽥꽥이", "청둥오리", "서울", "white");
+
+drr[2] = new RubberDuck("고무고무", "러버덕", 100);
+
+drr[3] = new Mallard("청둥이", "청둥오리", "부산", "blue");
+
+drr[4] = new Mallard("미세먼지", "청둥오리", "중국", "yellow");
+
+for(Duck d : drr) {
+
+d.quack();
+
+}
+
+}
+
+}
+
+평가항목	성취기준	채점기준
+0 ~ 4	프로그래밍 언어의 기초문법을 적용하고 언어의 특징과 라이브러리를 활용하여 기본 소프트웨어를 전혀 구현할 수 없다.
+10 ~ 14	프로그래밍 언어의 기초문법을 적용하고 언어의 특징과 라이브러리를 활용하여 기본 소프트웨어를 조금 구현할 수 있다.
+15 ~ 19	프로그래밍 언어의 기초문법을 적용하고 언어의 특징과 라이브러리를 활용하여 기본 소프트웨어를 일부만 구현할 수 있다.
+20 ~ 24	프로그래밍 언어의 기초문법을 적용하고 언어의 특징과 라이브러리를 활용하여 기본 소프트웨어를 부분적으로 구현할 수 있다.
+25 ~ 29	프로그래밍 언어의 기초문법을 적용하고 언어의 특징과 라이브러리를 활용하여 기본 소프트웨어를 대부분 구현할 수 있다.
+30 ~ 34	프로그래밍 언어의 기초문법을 적용하고 언어의 특징과 라이브러리를 활용하여 기본 소프트웨어를 대부분 구현할 수 있다.
+35 ~ 39	프로그래밍 언어의 기초문법을 적용하고 언어의 특징과 라이브러리를 활용하여 기본 소프트웨어를 거의 다 구현할 수 있다.
+40 ~ 44	프로그래밍 언어의 기초문법을 적용하고 언어의 특징과 라이브러리를 활용하여 기본 소프트웨어를 잘 구현할 수 있다.
+45 ~ 49	프로그래밍 언어의 기초문법을 잘 적용하고 언어의 특징과 라이브러리를 잘 활용하여 기본 소프트웨어를 매우 잘 구현할 수 있다.
+5 ~ 9	프로그래밍 언어의 기초문법을 적용하고 언어의 특징과 라이브러리를 활용하여 기본 소프트웨어를 매우 조금 구현할 수 있다.
+50	프로그래밍 언어의 기초문법을 정확히 적용하고 언어의 특징과 라이브러리를 잘 활용하여 기본 소프트웨어를 정확하게 구현할 수 있다.
+3.	2001020215_15v3.3 라이브러리 활용하기
+점수 (18.0점)
+아래 코드는 Compile시에는 문제가 발생하지 않았지만, 실행시 Runtime Exception 이 발생되었다. 발생한 Runtime Exception의 이름과 발생 위치, 이유를 모두 [원인](10점)에 작성하고, Runtime Exception이 발생하지 않도록 코드를 수정하여 [조치내용](10점)에 완성된 코드를 작성하시오. (20점)
+
+
+01_Ps_image3.jpg
+
+
+수강생 답
+(원인)	Runtime Exception의 이름:java.lang.ClassCastException​
+위치:ExceptionTestMain.java:10​
+
+​원인 : Object[] sarr 은 배열안의 공간이 3개였지만 다음 각 element에 입력한 값은 0~3까지 4개를 입력해서 한개 초과, sarr [2] 내부에 아무런 값이 들어가지않은 그냥 null상태
+
+
+
+
+
+
+
+답안첨삭	11행 - ArrayIndexOutofBoundException 이름 누락 -2
+
+
+
+
+2가지 예외상황에 대해 일부만 파악하여 원인에 대해 대략적으로 기술하였음.
+
+모범답안	
+Line 10 - ClassCastException : 자식 객체의 주소를 보관하는 배열의 인덱스에 상위타입의 객체의 주소를 보관하려 할 때 상위타입으로 강제 형변환 하게 되면 Exception이 발생한다.
+
+Line 11 - ArrayIndexOutOfBoundsException : length가 3인 배열의 존재하지 않는 3번 인덱스에 접근하려 해서 Exception이 발생한다.
+
+수강생 답
+(조치내용)	package test;
+
+
+public class ExceptionTestMain {
+
+	
+
+	public static void main(String[] args) {
+
+		Object[] sarr = new String[4];
+
+		
+
+		sarr[0] = new String("123");
+
+		sarr[1] = String.valueOf(new Integer(456));
+
+		sarr[2] = new String();
+
+		sarr[3] = String.valueOf(789);
+
+		
+
+		for(Object obj : sarr) {
+
+			System.out.println(obj);
+
+		}
+
+	}
+
+}
+
+
+
+답안첨삭	package test;
+
+
+public class ExceptionTestMain {
+
+	
+
+	public static void main(String[] args) {
+
+		Object[] sarr = new String[4];
+
+		
+
+		sarr[0] = new String("123");
+
+		sarr[1] = String.valueOf(new Integer(456));
+
+		sarr[2] = new String();
+
+		sarr[3] = String.valueOf(789);
+
+		
+
+		for(Object obj : sarr) {
+
+			System.out.println(obj);
+
+		}
+
+	}
+
+}
+
+
+
+2가지 파악된 원인에 대해 정확하게 해결조치를 잘 처리하였음
+
+모범답안	
+package com.kh.test.exception;
+
+public class ExceptionTestMain {
+
+public static void main(String[] args) {
+
+Object[] sarr = new String[3];
+
+//또는 new String[4] 로 처리할 수도 있음.
+
+sarr[0] = new String("123");
+
+sarr[1] = String.valueOf(new Integer(456));
+
+//1. 상위타입으로는 하위타입의 레퍼런스를 저장하는 공간에 주소를 보관할 수 없다.
+
+//따라서 이 코드는 별도의 수정을 하지 못하기 때문에 주석처리(제거) 해야 한다.
+
+//sarr[2] = (String) new Object();
+
+//또는 String.valueOf(new Object()); 로 처리해도 됨
+
+//2. length가 3이기 때문에 마지막 인덱스는 2이다.
+
+//2번 인덱스의 공간이 비어 있기 때문에 인덱스를 수정하면 된다.
+
+//혹은 위의 배열 선언한 크기를 수정해 주어도 된다.
+
+sarr[2] = String.valueOf(789);
+
+for(Object obj : sarr) {
+
+System.out.println(obj);
+
+}
+
+}
+
+}
+
+평가항목	성취기준	채점기준
+0 ~ 4	문법 오류를 이해하고 수정하려는 태도와 코드 검토 능력이 매우 부족하며, 애플리케이션 요구사항에 대한 이해도 매우 부족함
+10 ~ 14	문법 오류를 이해하고 수정하려는 태도와 코드 검토 능력이 보통이며, 애플리케이션 요구사항에 대한 이해도 보통임
+15 ~ 19	문법 오류를 이해하고 수정하려는 적극적인 태도와 코드 검토 능력이 우수하며, 애플리케이션 요구사항에 대한 이해가 뛰어남
+20	문법 오류를 이해하고 수정하려는 매우 적극적인 태도와 코드 검토 능력이 매우 우수하며, 애플리케이션 요구사항에 대한 이해가 아주 뛰어남
+5 ~ 9	문법 오류를 이해하고 수정하려는 태도와 코드 검토 능력이 부족하며, 애플리케이션 요구사항에 대한 이해도 부족함
