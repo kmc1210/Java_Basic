@@ -1,0 +1,34 @@
+
+	+ 얕은 복사, Shallow Copy
+	 
+	 - 참조 대상의 참조값(주소)만 복사되는 현상
+	 
+	 - 참조하고 있는 메모리 주소만 복사가 된다.
+	 
+	 - 생성된 데이터 저장공간은 복사되지 않는다.
+	
+	 - 참조형 변수를 단순히 대입했을 때 발생한다.
+	
+	 - ex) 	int[] arr1 = {10, 20 , 30};
+		int[] arr2;
+		arr2 = arr1;
+	
+	+ 깊은 복사, Deep Copy
+	 
+	 - 참조 대상의 내용물(실 데이터, 저장된 데이터)를 새로운 공간에 복사하는 것
+	
+	 -  1. 복사될 공간 확보(생성)
+		arr2 = new int[arr1.length];
+
+	 -  2. 데이터 복사 (for문 이용)
+		*for(int i=0; i<arr2.length; i++) {
+			arr2[i] = arr1[i];}
+		*(System클래스의 API기능(메소드) 이용)
+		  System.arraycopy(src, srcPos, dest, destPos, length);
+		// src : Source, 원본 배열
+		// srcPos : Source Position, 원본 배열에서 복사 시작할 인덱스(시작 할 위치)
+		// dest : Destination, 사본 배열
+		// destPos : Destination Position, 사본 배열에 복사 시작할 인덱스(시작 할 위치)
+		// length : 복사하는 데이터의 길이
+
+	+ Sort
