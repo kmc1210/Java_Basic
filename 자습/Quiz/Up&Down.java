@@ -40,3 +40,11 @@ public class Up_Down {
 		
 	}
 }
+//+UP&DWON 게임
+//- 컴퓨터가 1~50의 랜덤을 생성한다. (=COM)
+//- 사용자의 입력을 받는다 (=user)
+//- user가 com보다 낮은지 높은지 판단하여 up&down을 출력한다.
+//(기준은 com)
+//(ex. com== 40&& user == 30 -> up)
+//- user가 com과 같으면 user 승리
+//- 7번안에 맞추지 못하면 com 승리
