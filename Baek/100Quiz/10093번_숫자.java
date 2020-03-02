@@ -1,3 +1,7 @@
+
+
+import java.util.*;
+
 public class Baek_10093 {
 	public static void main(String[] args) {
 		
@@ -8,14 +12,14 @@ public class Baek_10093 {
 		long B = sc.nextLong();
 		
 		if(B>A) {
-		System.out.println(B-A);
+		System.out.println(B-A-1);
 		for(long i=1; i<=(B-A)-1; i++) {
 			System.out.print(A+i+" ");
 			}
 		}//B가A보다 클 경우
 		
 		else if(A>B) {
-		System.out.println(A-B);
+		System.out.println(A-B-1);
 		for(long i=1; i<=(A-B)-1; i++) {
 			System.out.print(B+i+" ");
 			}
@@ -26,4 +30,3 @@ public class Baek_10093 {
 		}
 	}
 }
-//런타임에러 뜸 왜그런거야 ㅠㅠㅠ
