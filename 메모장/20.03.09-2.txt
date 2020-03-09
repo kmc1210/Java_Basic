@@ -1,0 +1,52 @@
++ 매핑, Mapping
+
+  - 데이터와 데이터 사이의 관계
+  
+  - 두 집합의 원소들 간의 대응 관계
+  
+      일대일 매핑( 1:1 )
+      일대다 매핑( 1:m, one to many )
+      다대일 매핑( m:1, many to one )
+      다대다 매핑( m:n, many to many )
+      
++ Map 인터페이스
+ 
+  - 맵
+  
+  - Key, Value의 쌍으로 매핑되어있는 자료구조
+  
+  - Key -Value 쌍(Pair), Entry라고 함
+  
+  - Key : 기준값
+  - Value  : Key에 대응하는 데이터
+  
+  - 맵 자료구조에서 
+      Key는 중복 불가
+      Value는 중복 가능
+      
+  ** 이미 존재하는 데이터의 Key에 대응하는 value가 삽입되면
+   기존의 데이터에서 value만 새로운 값으로 교체한다.
+   
+  ** 이미 존재하는 데이터와 key값이 다른 쌍일 경우 value는 같은 값이
+   기존의 존재해도 아무 상관이 없이 삽입된다.
+   
++ interface Map의 구현체 (class)
+
+  - class HashMap
+  
+      Key 중복을 허용하지 않는다.
+      
+      Key 중복검사는 Hashcode () 의 반환값이 같고
+      equals() 의 반환값이 true일 때로 판단한다.
+      (동일성, 동등성 둘 다 만족할 때 중복 Key로 판단한다.)
+      
+  - class Hashtable
+  
+      HashMap과 같다.
+      
+      동기화처리되어있음
+      
+  - class Properties
+  
+        
+  
