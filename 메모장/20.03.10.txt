@@ -1,0 +1,44 @@
+
+ + 스택, Stack
+ 
+  - LIFO, Last Input First Output, 후입선출
+  - FILO, First Input Last Output, 선입후출
+  
+  - 가장 마지막(최근)에 입력된 데이터를 가자 먼저 사용한다.
+  
+  - 자바에서는 컬렉션의 Stack 클래스 타입으로 자료구조를 제공하고 있다.
+  
+  - 메소드 호출 스택(Call Stack)에서 사용되는 알고리즘이다.
+  
+ + class Stack의 주요 메소드(알고리즘)
+ 
+  - push() : 데이터 입력, 스택에 데이터를 추가하기
+  
+  - pop() : 데이터 출력, 스택에서 데이터를 반환 및 제거
+  
+  - peek() : 데이터 확인, 다음 차례에 pop()될 데이터 반환 (제거 X)
+  
+  
+  
+ + 큐, Queue
+ 
+  - FIFO, First Input First Output, 선입선출
+  - LILO, Last Input Last Output, 후입후출
+  
+  - FCFS 알고리즘, First Come First Served (먼저 온게 먼저 서비스를 받는다)
+  
+  - 대기열 시스템 구출할 때 사용한다.
+  
+  - 자바에서 Queue는 interface로만 제공된다.
+  - 구현체는 LinkedList를 주로 사용한다.
+  
++ interface Queue 주요 메소드(알고리즘)
+
+  - offer() : 데이터 입력, 데이터를 enqueue
+  
+  - poll() : 데이터 출력, 데이터를 dequeue
+  
+  - peek() : 데이터 확인, poll()될 데이터 확인 (제거 x)
+      
+      **enqueue(인큐) : 큐에 데이터 삽입하기(적용하기)
+      **dequeue(데큐) : 큐에서 데이터 제거하기(해제하기)
