@@ -1,0 +1,759 @@
+TCP 소켓을 사용하여 클라이언트에서 서버로 파일을 업로드 처리하는 프로그램을 구현하시오.
+
+[클라이언트용 프로그래밍 실행 순서]
+
+1. Book 객체 5개를 제네릭스가 적용된 ArrayList 에 저장한 다음 출력 확인한다.
+
+2. ArrayList 에 저장된 객체들을 books.dat 파일에 기록 저장한다.
+
+3. Socket 객체 생성으로 서버와 연결한다. (서버 IP : 192.168.20.34, 포트번호 : 3000)
+
+4. 서버로 파일명 전송하고 난 다음, books.dat 파일의 내용을 읽어서 전송한다.
+
+5. 파일 읽기가 완료되면, 서버로 null 을 보낸다.
+
+6. 서버로 부터 "exit" 메세지를 받고 나면 소켓 닫는다.
+
+[서버용 프로그래밍 실행 순서]
+
+1. 포트번호 3000번으로 ServerSocket 객체 생성한다.
+
+2. 클라이언트로 부터 연결 요청을 기다리다가, 연결 요청이 오면 accept() 한다.
+
+3. 연결된 클라이언트와 스트림을 생성한 다음, 전송온 파일 정보를 받는다.
+
+4. 전송받은 데이터는 서버의 지정된 폴더 "upload/전송온 파일명.dat" 으로 저장한다.
+
+5. 클라이언트가 null 을 보내면 파일 저장처리를 종료하고, 클라이언트로 "exit" 메세지 보낸다.
+
+6. 스트림을 닫고, 클라이언트 소켓도 닫는다.
+
+7. 서버는 다시 연결 요청 대기상태가 된다.
+
+1. Book 클래스를 작성하고, 직렬화 선언한다.
+
+- title 과 price 필드를 선언한다
+
+- 기본생성자와 매개변수 있는 생성자를 작성한다.
+
+- 필드에 대한 getter 와 setter 작성한다.
+
+- toString() 메소드를 오버라이딩하여 인스턴스변수의 값에 대한 문장을 작성하여 리턴한다.
+
+요구사항	kh.model.vo 패키지에 Book 클래스를 구현하시오.
+수강생 답	package kh.model.vo;
+
+
+public class Book {
+
+	String title;
+
+	int price;
+
+	public String getTitle() {
+
+		return title;
+
+	}
+
+	public void setTitle(String title) {
+
+		this.title = title;
+
+	}
+
+	public int getPrice() {
+
+		return price;
+
+	}
+
+	public void setPrice(int price) {
+
+		this.price = price;
+
+	}
+
+	public Book() {
+
+		
+
+	}
+
+	public Book(String tilte, int price) {
+
+		
+
+	}
+
+	@Override
+
+	public String toString() {
+
+		return "Book [title=" + title + ", price=" + price + "]";
+
+	}
+
+}​
+
+답안첨삭	​
+응용소프트웨어개발을 위하여 운영체제, 데이터 저장 관리의 기초 기술을 적용하여 일부만 프로그램을 구현할 수 있다.
+
+모범답안	
+package kh.model.vo;
+
+public class Book implements java.io.Serializable{
+
+private String title;
+
+private int price;
+
+public Book(){}
+
+public Book(String title, int price){
+
+this.title = title;
+
+this.price = price;
+
+}
+
+public void setTitle(String title){
+
+this.title = title;
+
+}
+
+public String getTitle(){
+
+return title;
+
+}
+
+public void setPrice(int price){
+
+this.price = price;
+
+}
+
+public int getPrice(){
+
+return price;
+
+}
+
+@Override
+
+public String toString(){
+
+return title + ", " + price;
+
+}
+
+}
+
+2. BookManager 클래스를 구현한다.
+
+- ArrayList<Book> bookList; 필드 선언한다.
+
++ 기본생성자 작성한다.
+
+=> bookList = new ArrayList<Book>(); 객체 생성
+
++ fileSave() : void
+
+=> bookList 에 임의의 5개의 Book 객체를 리스트에 저장한다.
+
+=> 저장된 bookList 정보 출력 확인한다.
+
+=> 객체를 books.dat 파일에 저장 출력하기 위한 기본 스트림과 보조 스트림 객체를 생성한다.
+
+=> bookList 에 저장된 Book 객체들을 books.dat 파일에 기록 저장 처리한다.
+
+=> 스트림은 자동 close 되게 처리한다.
+
++ fileOpen() : void
+
+=> books.dat 파일로 부터 객체를 읽어들일 수 있는 기본스트림과 보조스트림 생성한다.
+
+=> 읽어들인 객체들을 bookLis에 저장한다.
+
+=> bookList 에 저장된 Book 객체들을 콘솔에 확인을 위해 출력 처리한다.
+
+=> 스트림은 자동 close 되게 처리한다.
+
+요구사항	kh.controller.BookManager 클래스를 구현하시오.
+수강생 답	package kh.controller;
+
+
+import java.io.*;
+
+import java.net.*;
+
+import java.util.*;
+
+
+
+import javax.sound.sampled.Port;
+
+
+
+import kh.model.vo.Book;
+
+
+
+public class BookManager{
+
+	public static List<Book> bookList;
+
+
+
+	public BookManager() {
+
+		bookList = new ArrayList<>();
+
+
+
+	}
+
+	
+
+	public void fileSave() {
+
+		bookList.add(0, null);
+
+		bookList.add(1, null);
+
+		bookList.add(2, null);
+
+		bookList.add(3, null);
+
+		bookList.add(4, null);
+
+		System.out.println(bookList);
+
+		File file = new File("./src/kh/", "bookList");
+
+		try {
+
+			BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+
+			PrintWriter out = new PrintWriter(file);
+
+		} catch (FileNotFoundException e) {
+
+			e.printStackTrace();
+
+		}
+
+
+
+		
+
+	}
+
+	public void fileOpen() {
+
+		
+
+	}
+
+}
+
+답안첨삭	
+응용소프트웨어개발을 위하여 운영체제, 데이터 저장관리에 대한 파일관리의 기초 기술을 적용하여 일부 프로그램을 구현할 수 있다.
+
+모범답안	
+package kh.controller;
+
+import java.io.EOFException;
+
+import java.io.FileInputStream;
+
+import java.io.FileOutputStream;
+
+import java.io.ObjectInputStream;
+
+import java.io.ObjectOutputStream;
+
+import java.util.ArrayList;
+
+import kh.model.vo.Book;
+
+public class BookManager {
+
+private ArrayList<Book> bookList;
+
+public BookManager() {
+
+bookList = new ArrayList<Book>();
+
+}
+
+// Book 객체 파일 출력용
+
+public void fileSave() {
+
+bookList.add(new Book("자바를 잡아라", 30000));
+
+bookList.add(new Book("오라클 정복", 35000));
+
+bookList.add(new Book("웹표준 2.0", 27500));
+
+bookList.add(new Book("자바 Servlet/JSP", 28000));
+
+bookList.add(new Book("ajax 사용법", 15000));
+
+System.out.println(bookList);
+
+try (ObjectOutputStream oOut = new ObjectOutputStream(new FileOutputStream("books.dat"));) {
+
+for (int i = 0; i < bookList.size(); i++) {
+
+oOut.writeObject(bookList.get(i));
+
+oOut.flush();
+
+}
+
+} catch (Exception e) {
+
+e.printStackTrace();
+
+}
+
+}
+
+// Book 객체 파일 입력용
+
+public void fileOpen() {
+
+try (ObjectInputStream oIn = new ObjectInputStream(new FileInputStream("books.dat"));) {
+
+while (true) {
+
+bookList.add((Book) oIn.readObject());
+
+}
+
+} catch (EOFException e) {
+
+for (Book b : bookList) {
+
+System.out.println(b);
+
+}
+
+} catch (Exception e) {
+
+e.printStackTrace();
+
+}
+
+}
+
+} // class close
+
+3. BookManager 클래스에 fileUpload() 메소드 추가 구현한다.
+
++ fileUpload() : void
+
+=> 예외처리는 try ~ catch 로 직접 처리한다.
+
+=> Socket 객체 생성으로 서버와 연결한다. (서버 IP : 192.168.20.34, 포트번호 : 3000)
+
+=> 서버로 books.dat 파일의 내용을 읽어서 전송한다.
+
+=> 서버로 부터 "exit" 메세지를 받고 나면 소켓 닫는다.
+
+요구사항	BookManager 클래스에 fileUpload() 메소드를 추가 구현하시오.
+수강생 답	public void fileUpload() {
+		Socket sock = null;
+
+		ServerSocket serv = null;
+
+		String msg = null;
+
+		try {
+
+			sock = new Socket();
+
+			serv = new ServerSocket(3000);
+
+			int port = serv.getLocalPort();
+
+			InetAddress ip = serv.getInetAddress();
+
+			
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+
+		}
+
+	}
+
+답안첨삭	
+응용소프트웨어개발을 위하여 운영체제, 데이터 파일 처리 기술, 네트워크의 기초 기술을 적용하여 프로그램을 구현할 수 없다.
+
+모범답안	// 서버로 파일을 전송하기 위한 메소드
+public void fileUpload() {
+
+int port = 3000;
+
+String serverIP = "192.168.20.34";
+
+try {
+
+//serverIP = InetAddress.getLocalHost().getHostAddress();
+
+// 2. 소켓 객체 생성 : 생성과 동시에 서버에 연결 요청됨
+
+Socket socket = new Socket(serverIP, port);
+
+// 연결 실패는 null 리턴됨
+
+if (socket != null) { // 서버와 연결되었다면...
+
+// 3. 서버와 해당 클라이언트 간의 입/출력 스트림 생성
+
+BufferedReader br = new BufferedReader(
+
+new InputStreamReader(socket.getInputStream()));
+
+ObjectOutputStream objOut = new ObjectOutputStream(
+
+socket.getOutputStream());
+
+// 4. 파일에 저장된 데이터 읽어서 서버로 보냄
+
+//파일 읽기용 스트림을 생성한다.
+
+ObjectInputStream objIn = new ObjectInputStream(new FileInputStream("books.dat"));
+
+try {
+
+while(true) {
+
+Object obj = objIn.readObject();
+
+objOut.writeObject(obj);
+
+}
+
+} catch (EOFException e) {
+
+objOut.writeObject(null);
+
+objOut.flush();
+
+String returnMessage = br.readLine();
+
+if(returnMessage.equals("exit")) {
+
+// 5. 스트림 반납
+
+objIn.close();
+
+objOut.close();
+
+br.close();
+
+socket.close();
+
+}
+
+}
+
+}
+
+} catch (Exception e) {
+
+e.printStackTrace();
+
+}
+
+}
+
+4. kh.client.run.RunClient 클래스를 작성한다.
+
+- main() 메소드를 포함한다.
+
+- kh.conroller.BookManager 클래스의 fileSave() 메소드 실행구문을 작성한다.
+
+- 그 다음에 BookManager 클래스의 fileOpen() 메소드 실행구문을 작성한다.
+
+- 그 다음에 BookManager 클래스의 fileUpload() 메소드 실행구문을 작성한다.
+
+요구사항	클라이언트용 RunClient 클래스를 구현하시오.
+수강생 답	package kh.client.run;
+
+import kh.controller.BookManager;
+
+public class RunClient {
+	public static void main(String[] args) {
+		BookManager bm = new BookManager();
+		bm.fileSave();
+		bm.fileUpload();
+		Thread Thbm = new Thread();
+		try {
+			Thbm.join();
+			Thbm.start();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+}​
+
+
+답안첨삭	
+응용소프트웨어개발을 위하여 운영체제, 네트워크의 기초 기술을 적용하여 일부만 프로그램을 구동할 수 있다.
+
+모범답안	
+package kh.client.run;
+
+import kh.controller.BookManager;
+
+public class RunClient{
+
+public static void main(String[] args){
+
+BookManager bm = new BookManager();
+
+bm.fileSave();
+
+bm.fileOpen();
+
+bm.fileUpload();
+
+}
+
+}
+
+5. ServerManager 클래스를 구현한다.
+
++ 기본생성자 작성한다.
+
++ serverStart() : void
+
+=> port 번호 3000번으로 ServerSocket 객체를 생성한다.
+
+=> 클라이언트로 부터 연결 요청을 받는다.
+
+=> fileLoad(클라이언트 연결 소켓)을 전달한다.
+
+=> fileLoad() 메서드가 true 를 리턴하면, 클라이언트 연결 소켓을 닫는다.
+
+=> 서버는 계속 연결 대기 상태를 유지한다.
+
++ fileLoad(Socket client) : boolean
+
+=> client 소켓을 이용하여 입출력 스트림을 생성한다.
+
+=> 서버에 books.dat 파일 출력 스트림과 객체 출력 보조스트림을 생성햔다.
+
+=> 클라이언트로 부터 전송온 객체 정보를 콘솔에 출력하고 나서, 파일에 저장한다.
+
+=> 전송이 완료되면 클라이언트로 "exit" 메세지 보내고 스트림들을 닫는다.
+
+=> true 값을 리턴한다.
+
+요구사항	ServerManager 클래스를 구현하시오.
+수강생 답	package kh.client.run;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class ServerManager {
+	public ServerManager() {
+		
+	}
+	public void serverStart() {
+		Socket sock = new Socket();
+		BufferedReader in = null;
+		FileWriter out = null;
+		ServerSocket serv = null;
+		try {
+			serv = new ServerSocket();
+			in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+		
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public boolean fileLoad() {
+		
+		return true;
+		
+	}
+}​
+
+
+답안첨삭	
+응용소프트웨어개발을 위하여 운영체제, 네트워크의 연결 및 데이터 전송 관련 기초 기술을 적용하여 정확하게 프로그램을 구현할 수 있다.
+
+모범답안	
+package kh.controller;
+
+import java.io.*;
+
+import java.net.*;
+
+public class ServerManager {
+
+public ServerManager() {}
+
+public void serverStart() {
+
+// 1. port 번호 지정
+
+int port = 3000;
+
+// 2. 서버용 소켓 객체 생성
+
+ServerSocket server;
+
+try {
+
+server = new ServerSocket(port);
+
+// 3. 클라이언트가 연결을 요청할 때까지 기다림
+
+while (true) {
+
+// 4. 연결을 요청한 클라이언트의 요청 수락함 : 해당 클라이언트 정보를 저장
+
+Socket client = server.accept();
+
+if(fileLoad(client)) {
+
+client.close();
+
+}
+
+}
+
+} catch (IOException e) {
+
+e.printStackTrace();
+
+}
+
+}
+
+public boolean fileLoad(Socket client) {
+
+boolean result = false;
+
+ObjectInputStream objIn = null;
+
+PrintWriter pw = null;
+
+ObjectOutputStream objOut = null;
+
+try {
+
+objIn = new ObjectInputStream(
+
+client.getInputStream());
+
+pw = new PrintWriter(client.getOutputStream());
+
+objOut = new ObjectOutputStream(
+
+new FileOutputStream("books.dat"));
+
+while(true) {
+
+Object obj = objIn.readObject();
+
+if(obj == null) break;
+
+objOut.writeObject(obj);
+
+objOut.flush();
+
+}
+
+} catch (Exception e) {
+
+e.printStackTrace();
+
+}finally {
+
+pw.print("exit");
+
+pw.flush();
+
+try {
+
+objIn.close();
+
+pw.close();
+
+objOut.close();
+
+result = true;
+
+return result;
+
+}catch(IOException e) {
+
+e.printStackTrace();
+
+}
+
+}
+
+return result;
+
+}
+
+}
+
+6. kh.server.run.RunServer 클래스를 작성한다.
+
+- main() 메소드를 포함한다.
+
+- kh.conroller.ServerManager 클래스의 serverStart() 메소드 실행구문을 작성한다.
+
+요구사항	클라이언트용 RunServer 클래스를 구현하시오.
+수강생 답	package kh.server.run;
+
+import kh.client.run.ServerManager;
+
+public class RunServer {
+	public static void main(String[] args) {
+		ServerManager sm = new ServerManager();
+		sm.serverStart();
+	}
+}​
+
+
+답안첨삭	
+응용소프트웨어개발을 위하여 운영체제, 네트워크의 기초 기술을 적용하여 정확하게 프로그램을 구동할 수 있다.
+
+모범답안	
+package kh.server.run;
+
+import kh.controller.ServerManager;
+
+public class RunServer{
+
+public static void main(String[] args){
+
+ServerManager sm = new ServerManager();
+
+sm.serverStart();
+
+}
+
+}
