@@ -1,0 +1,118 @@
+
++ 오라클 Database 11g R2 Express Edition 다운로드 하기
+  
+  - www.oracle.com 접속
+  - 메뉴에서 Downloads 선택
+  - Database 항목 선택
+  - Database 11g Enterprise/Standard Editions 선택
+  - 제일 밑에 Oracle Database 11g Release 2 Express Edition for Windows 64 선택
+  - Oracle Database 11gR2 Express Edition for Windows x64 선택해서 다운로드
+  - 라이센스 항목 체크하고 동의
+  - 회원가입 및 로그인하면 다운로드 시작
+  
+ + 오라클 SQL Developer 다운로드
+ 
+  - https://www.oracle.com/tools/downloads/sqldev-downloads.html
+  - www.oracle.com 접속
+  - 메뉴에서 Downloads 선택
+  - Developer Tools 항목 선택
+  - SQL Developer 선택
+  - Windows 64-bit with JDK 8 included 항목의 Download 선택
+  - 라이센스 항목 체크하고 동의
+  - 회원가입 및 로그인하면 다운로드 시작
+  
+  + 오라클 DBMS 설치 확인
+  
+   - 윈도우 콘솔창(cmd창) 열기
+    (win 키 +  r 로 실행창 열기)
+    
+   -  sqlplus / nolog 입력
+   
+   -  conn sys as sysdba
+   -  비밀번호 1234 입력
+   -  show user; 입력
+   -  USER is "SYS" 라고 나오면 설치 
+  
+  + scott.sql 파일을 DB에 적용하기
+   -  sqlplus / nolog 입력
+   -  conn system/1234; 입력
+   -  show user; 입력
+   -  USER is "SYSTEM" 문구 확인
+   
+   
+ + SQL Developer 에서 데이터베이스에 접속 하기
+   - 파일 메뉴 -새로만들기
+   
+   - General - 접속선택
+   - 오른쪽 창에서 데이터베이스 접속 선택
+   - 확인
+   
+   - 접속 이름 : 아무거나 (ex. WEB)
+   - 사용자 이름 : scott
+   - 비밀번호 : tiger
+   - 비밀번호 저장 체크
+   
+   - 테스트 -> 상태: 성공 뜨는 거 확인
+   - 접속
+   
+ + 컴퓨터 부팅할 때 오라클 서비스 자동으로 켜지지 않게 하기
+ 
+   - win키 + r(실행) 창에서
+   
+   - services.msc 입력
+    (윈도우의 서비스 프로그램들을 관리하는 설정 창)
+    
+   - OracleServiceXE
+   - OracleXETNSLinstener
+   
+   - 위 두 서비스의 시작 유형을 "수동"으로 변경
+   
+   - 부팅할 때 자동으로 켜지지 않음
+   - 대신 오라클 DB를 사용하려면 "Start Database" 프로그램 실행해야함.
+   
+ + 오라클 클라이언트 툴(Tool)
+ 
+  1. SQL*Plus
+      - Oracle DBMS에서 제공하는 기본 도구 Tool
+      - 별도의 설치없이 사용 가능
+      
+      - CLI환경 ( Command Line Interface )
+      
+      - 윈도우 콘솔에서 sqlplus라고 입력
+      - 시작메뉴에서 'Run SQL Command Line' 실행
+      
+  2. SQL*Developer
+      - 오라클에서 제공하는 추가적인 클라이언트 Tool
+      
+      - GUI환경 ( Graphical User Interface )
+      
+      
+  + DBMS, DataBase Management System
+      - 데이터베이스 관리 시스템
+      
+      - Oracle DB, MS-SQL, MySql, MongoDB, SQLite 등등
+      
+  + 데이터베이스 , Database
+      
+      - 데이터 저장소
+      
+      - 체계적인 데이터의 모음
+      
+      - 여러 클라이언트(사람, 프로그램 등)들이 데이터를 공유하면서 사용할 목적으로 관리되는 통합 정보 시스템
+      
+      - 데이터베이스 내에 테이블들을 생성하여 데이터를 관리한다.
+      
+      - 우리는 오라클 DB를 사용
+      
+          버전: Oracle DB 11g Release 2.
+          제품군 : Express Edition
+          (Standard Edition, Standard One Edition, Enterprise Edition )
+      
+          ** 오라클 DB Express Edition(XE) 에는  DB가 한 개만 존재한다.
+          ** SID : xe (DB이름)
+          
+          ** Standard Edition 도 DB가 한 개만 존재한다.
+          ** SID : orcl (DB이름)
+          
+          ** Enterprise Edition 은 DB를 여러 개 생성할 수 있음
+      
