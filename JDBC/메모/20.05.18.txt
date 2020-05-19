@@ -93,7 +93,7 @@
                  
 ** 웹 프로그래밍에서는 Controller의 역할 나누어 Service Layer를 둔다                 
           
-    Service 계층은 비지니스 로직의   
+    Service 계층은 비지니스 로직의 
 
     Controller의 역할 1.
     
